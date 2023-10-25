@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+
+/*This class represent cardbyte account*/
 @Table(name = "account")
 @Entity
 @EntityListeners(AuditingEntityListener.class)

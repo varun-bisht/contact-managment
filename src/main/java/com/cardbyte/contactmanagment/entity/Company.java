@@ -1,7 +1,5 @@
 package com.cardbyte.contactmanagment.entity;
 
-import com.cardbyte.contactmanagment.common.constant.ActionType;
-import com.cardbyte.contactmanagment.common.constant.ContactType;
 import com.cardbyte.contactmanagment.common.constant.SyncStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,14 +9,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
-@Table(name = "contact")
+/*This class represent zoho or crm account module(which contain company or org related info) not regular account*/
+@Table(name = "company")
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class Contact extends BaseEntity{
+public class Company extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,16 +25,25 @@ public class Contact extends BaseEntity{
     private Long id;
 
     @Column
-    private String zohoContactId;
+    private String userId;
 
     @Column
-    private String firstName;
+    private String zohoAccountID;
+
+/*
+    Company name should be unique
+*/
+    @Column(unique = true)
+    private String name;
 
     @Column
-    private String lastName;
+    private String type;
 
     @Column
-    private String email;
+    private String industry;
+
+    @Column
+    private String website;
 
     @Column
     private String phoneNo;
@@ -43,29 +51,17 @@ public class Contact extends BaseEntity{
     @Column
     private String address;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "company_id", referencedColumnName = "id")
-    private Company company;
+    @Column
+    private String description;
 
     @Column
-    private String jobTitle;
-
-    @Column
-    @Enumerated(EnumType.STRING)
-    private ContactType contactType;
+    private String contactPerson;
 
     @Column
     private Boolean isActive;
 
     @Column
-    private String notes;
-
-    @Column
     @Enumerated(EnumType.STRING)
     private SyncStatus syncStatus;
-
-    @Column
-    @Enumerated(EnumType.STRING)
-    private ActionType actionType;
 
 }

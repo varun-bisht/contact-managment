@@ -2,9 +2,8 @@ package com.cardbyte.contactmanagment.controller;
 
 
 import com.cardbyte.contactmanagment.common.model.ApiSucessResponse;
-import com.cardbyte.contactmanagment.entity.Contact;
-import com.cardbyte.contactmanagment.payload.request.CreateContactRequest;
-import com.cardbyte.contactmanagment.service.ContactService;
+import com.cardbyte.contactmanagment.entity.Company;
+import com.cardbyte.contactmanagment.service.CompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/contact/")
-public class ContactController{
+@RequestMapping("/company/")
+public class CompanyController{
 
-    private ContactService contactService;
+    private CompanyService companyService;
 
     @PostMapping("create")
-    private ResponseEntity<Contact> save(@RequestBody CreateContactRequest createContactRequest){
-        return ApiSucessResponse.buildSucess(contactService.save(createContactRequest));
+    private ResponseEntity<Company> save(@RequestBody Company company){
+        return ApiSucessResponse.buildSucess(companyService.save(company));
     }
 
 }
